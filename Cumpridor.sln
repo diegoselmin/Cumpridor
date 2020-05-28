@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumpridor", "Cumpridor\Cumpridor.csproj", "{2A366A3B-77D6-4BA6-876D-05A3839DD650}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A366A3B-77D6-4BA6-876D-05A3839DD650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A366A3B-77D6-4BA6-876D-05A3839DD650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A366A3B-77D6-4BA6-876D-05A3839DD650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A366A3B-77D6-4BA6-876D-05A3839DD650}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D95AD9D-1662-48DA-97D6-91D44F6F0BE7}
+	EndGlobalSection
+EndGlobal

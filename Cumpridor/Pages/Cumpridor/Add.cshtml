@@ -1,0 +1,67 @@
+﻿@page
+@model Cumpridor.AddModel
+@{
+    ViewData["Title"] = "Adicionar Novo Cumpridor";
+}
+<div>
+    <div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><strong>Novo Cumpridor</strong></h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 item_img">
+                        <img src="~/images/add.jpg" class="img-responsive">
+                    </div>
+                    <div class="col-md-8 item_content">
+                        <form method="post">
+                            <h4>
+                                <span>Informe os dados do Cumpridor!!!</span>
+                            </h4>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="col-md-12" style="margin-top:15px;">
+                                                    <label asp-for="cumpridor.Nome" style="font-weight:bold;"></label>
+                                                    <input type='text' class='form-control' asp-for="cumpridor.Nome" />
+                                                    <span class="alert-danger" asp-validation-for="cumpridor.Nome"></span>
+                                                </div>
+                                                <div class="col-md-12" style="margin-top:15px;">
+                                                    <label asp-for="cumpridor.Cpf" style="font-weight:bold;"></label>
+                                                    <input type='text' class='form-control' asp-for="cumpridor.Cpf" />
+                                                    <span class="alert-danger" asp-validation-for="cumpridor.Cpf"></span>
+                                                </div>
+                                                <div class="col-md-12" style="margin-top:15px;">
+                                                    <label asp-for="cumpridor.Email" style="font-weight:bold;"></label>
+                                                    <input type='text' class='form-control' asp-for="cumpridor.Email" />
+                                                    <span class="alert-danger" asp-validation-for="cumpridor.Email"></span>
+                                                </div>
+                                                <div class="col-md-12" style="margin-top:15px;">
+                                                    <label asp-for="cumpridor.Senha" style="font-weight:bold;"></label>
+                                                    <input type='text' class='form-control' asp-for="cumpridor.Senha" />
+                                                    <span class="alert-danger" asp-validation-for="cumpridor.Senha"></span>
+                                                </div>
+                                                <div class="text-center col-md-12" style="margin-top:35px;">
+                                                    <button class="btn btn-primary btn-sx" type="submit">
+                                                        <i class="glyphicon glyphicon-plus"></i> Adicionar Cumpridor
+                                                    </button>
+                                                    <a class="btn btn-success btn-sx" asp-page="/Cumpridor/Index">
+                                                        <i class="glyphicon glyphicon-backward"></i> Lista de Cumpridores
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
