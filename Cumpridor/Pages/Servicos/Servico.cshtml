@@ -1,0 +1,137 @@
+﻿
+@page
+@model Servicos.ServicoModel
+@{
+    ViewData["Title"] = "Servico";
+}
+@using Microsoft.AspNetCore.Http;
+<script>
+    function macFunction(x) {
+        $("#item_view").modal();
+    };
+
+    function Aceitar(value) {
+
+        if (confirm('Deseja realmente aceitar este serviço?')) {
+            var Id = value;
+            $.ajax({
+                type: "GET",
+                url: "?handler=Aceitar",
+                data: { Id },
+
+                dataType: "json",
+                success: function (msg) {
+                    // Replace the div's content with the page method's return.
+                    $("#Result").text(msg.d);
+                },
+                error: function () {
+                    $("#Result").text('Failed');
+                }
+            });
+        }
+    };
+
+    function Concluir(value) {
+
+        if (confirm('Deseja realmente concluir este serviço?')) {
+            var Id = value;
+            $.ajax({
+                type: "GET",
+                url: "?handler=Concluir",
+                data: { Id },
+
+                dataType: "json",
+                success: function (msg) {
+                    // Replace the div's content with the page method's return.
+                    $("#Result").text(msg.d);
+                },
+                error: function () {
+                    $("#Result").text('Failed');
+                }
+            });
+        }
+    };
+
+    $(document).ready(function () {
+        $("#success-alert").hide();
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+            $("#success-alert").slideUp(500);
+        });
+    });
+
+
+</script>
+<div class="container">
+    <div class="mail-box">
+        <aside class="lg-side">
+            <div class="inbox-head">
+                <h3>Fila de Serviços- @HttpContext.Session.GetString("user")</h3>
+            </div>
+            <br />
+            @{
+                if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-success" id="success-alert" style="margin-top: 40px;">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>@Model.Message ! </strong>
+                    </div>
+                }
+            }
+            <div class="inbox-body" style="margin-top:20px;">
+                <div class="mail-option">
+                    <table class="table table-inbox table-hover" style="border:2px solid black;">
+                        <thead>
+                            <tr class="unread">
+                                <th class="view-message col-sm-3">CLIENTE</th>
+                                <th class="view-message col-sm-2">DATA AGENDAMENTO</th>
+                                <th class="view-message col-sm-2">OBSERVAÇÃO</th>
+                                <th class="view-message col-sm-1">TIPO</th>
+                                <th class="view-message  text-left col-sm-2">VALOR</th>
+                                <th class="view-message  text-left col-sm-2">AÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.filas)
+                            {
+                                <tr>
+                                    <td onclick="macFunction(this)" class="view-message  dont-show">
+                                        <h4>@item.Cliente</h4>
+                                    </td>
+                                    <td onclick="macFunction(this)" class="view-message">
+                                        <h5>@item.DataAgendamento</h5>
+                                    </td>
+                                    <td onclick="macFunction(this)">
+                                        <h5>@item.Observacao</h5>
+                                    </td>
+                                    <td onclick="macFunction(this)" class="view-message">
+                                        <h5>@item.Tipo.Descricao</h5>
+                                    </td>
+                                    <td onclick="macFunction(this)" class="view-message">
+                                        <h5>@string.Format("{0:C}", @item.Tipo.Valor)</h5>
+                                    </td>
+                                    <td>
+                                        <form method="post">
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button type="button" class="btn btn-light btn-xs" asp-page-handler="Aceitar"
+                                                        asp-route-id="@item.Id" style="height: 27px; margin-top: 0px;"
+                                                        onclick="Aceitar('@item.Id');">
+                                                    <i class="glyphicon glyphicon-remove">Aceitar</i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" asp-page-handler="Concluido"
+                                                        asp-route-id="@item.Id" style="height: 27px; margin-top: 0px;"
+                                                        onclick="Concluir('@item.Id');">
+                                                    <i class="glyphicon glyphicon-remove">Concluir</i>
+                                                </button>
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+

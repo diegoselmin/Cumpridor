@@ -24,9 +24,14 @@ namespace Cumpridor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<ICumpridorRepository, CumpridorRepository>();
+            services.AddTransient<IServicosRepository, ServicosRepository>();
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {
@@ -50,7 +55,7 @@ namespace Cumpridor
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

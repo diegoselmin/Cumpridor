@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cumpridor.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -33,14 +34,26 @@ namespace Cumpridor.Pages.Cumpridor
         {
             if (ModelState.IsValid)
             {
-
-                var cumpridor = _cumpridorRepository.LogOn(login);
-                if (cumpridor != null)
+                try
                 {
-                    Message = "Cumpridor Logado com Sucesso!";
-                    return RedirectToPage("/Index", new { user = cumpridor.Nome });
-                   
+                    var cumpridor = _cumpridorRepository.LogOn(login);
+
+                    if (cumpridor != null)
+                    {
+                        HttpContext.Session.SetString("user", cumpridor.Nome);
+                        Message = "Cumpridor " + login.Nome + " Logado com Sucesso!";
+                        //return RedirectToPage("/Index", new { user = cumpridor.Nome });
+                        return RedirectToPage("/Servicos/Servico");
+
+                    }
                 }
+                catch (Exception ex) 
+                {
+                    Message = "Falha ao realizar o login! - ERROR : " + ex.Message;
+                    return Page();
+                }
+
+                
             }
             return Page();
         }
